@@ -49,10 +49,12 @@ body{
 	height: 100%;
 	display: none;
 	transition-duration: 1s;
+	background: linear-gradient(to right,rgba(44, 83, 100, 0.5), rgba(32, 58, 67, 0.5), rgba(15, 32, 39, 0.5));
 }
 
 .popup.active{
 	display: flex;
+	transition-duration: 1s;
 }
 
 .popup.show{
@@ -68,7 +70,6 @@ body{
 .popup .box i{	
 	color: var(--gold-color);
 	background:linear-gradient(to right, #2c5364, #203a43, #0f2027);
-	cursor: pointer;
 }
 
 .popup .box i.close{
@@ -113,6 +114,11 @@ body{
 	align-items: center;
 	border-radius: 50%;
 	font-size: 15px;
+	cursor: pointer;
+}
+
+.popup .box ul li{
+	transition-duration: 1s;
 }
 
 .popup .box ul li.active{
