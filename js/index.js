@@ -5,6 +5,7 @@ let popupKeys=document.querySelectorAll("#Gallery .popupkeys"),
 	nextImgButton=popup.querySelector(".next"),
 	popupBox=popup.querySelector(".box"),
 	galleryImgs=document.querySelectorAll("#Gallery img"),
+	galleryImgsArr,
 	currentImg,
 	currentImgSrc,
 	currentImgIndex,
@@ -15,11 +16,18 @@ let popupKeys=document.querySelectorAll("#Gallery .popupkeys"),
 
 popupKeys.forEach(function(popupKey){
 	popupKey.addEventListener("click",openPopup);
-	popupKey.addEventListener("click",convertToCurrentImg);
+	popupKey.addEventListener("click",function(){
+	currentImg=popupKey.parentElement.previousElementSibling;
+	currentImgSrc=currentImg.src;
+	popupImg.src=currentImgSrc;
+	galleryImgsArr=Array.from(galleryImgs);
+	console.log(galleryImgsArr);
+	console.log(currentImg);
+	currentImgIndex=galleryImgsArr.indexOf(currentImg);
+	console.log(currentImgIndex);
+	});
 
-	// galleryImgsArr=Array.from(galleryImgs);
-	// currentImgIndex=galleryImgsArr.indexOf(currentImg);
-	// console.log(currentImgIndex);
+	
 });
 
 // nextImgButton.addEventListener("click",function(){

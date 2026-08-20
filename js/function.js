@@ -14,7 +14,5 @@ function closePopup(){
 }
 
 function convertToCurrentImg(){
-	currentImg=popupKey.parentElement.previousElementSibling;
-	currentImgSrc=currentImg.src;
-	popupImg.src=currentImgSrc;
+	
 }
