@@ -12,3 +12,9 @@ function closePopup(){
 			popup.classList.remove("active");
 		},1000);//1000 because of transition-duration of 1s
 }
+
+function convertToCurrentImg(){
+	currentImg=popupKey.parentElement.previousElementSibling;
+	currentImgSrc=currentImg.src;
+	popupImg.src=currentImgSrc;
+}
