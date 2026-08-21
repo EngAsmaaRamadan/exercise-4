@@ -13,6 +13,13 @@ function closePopup(){
 		},1000);//1000 because of transition-duration of 1s
 }
 
-function convertToCurrentImg(){
-	
+function convertToCurrentImg(imgSrc){
+	popupImg.src=imgSrc;
+}
+
+function updateIndicator(){
+	let prevIndicator=popup.querySelector(".indicators li.active"),
+		currentIndicator=indicatorButtons[currentImgIndex];
+	prevIndicator.classList.remove("active");
+	currentIndicator.classList.add("active");
 }
