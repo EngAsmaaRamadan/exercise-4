@@ -23,3 +23,41 @@ function updateIndicator(){
 	prevIndicator.classList.remove("active");
 	currentIndicator.classList.add("active");
 }
+
+function prevImgArrow(){
+	currentImgIndex=(--currentImgIndex +galleryImgs.length)% galleryImgs.length;
+	let prevImgIndex=currentImgIndex,
+		prevImg=galleryImgs[prevImgIndex];
+	convertToCurrentImg(prevImg.src);
+	updateIndicator();
+}
+
+function nextImgArrow(){
+	currentImgIndex=(++currentImgIndex % galleryImgs.length);
+	let nextImgIndex=currentImgIndex,
+		nextImg=galleryImgs[nextImgIndex];
+	convertToCurrentImg(nextImg.src);
+	updateIndicator();
+}
+
+/*
+
+$(document).addEventListener("keydown",function(e) {
+	if(e.KeyCode == 27){
+		closePopup();
+	}
+});
+
+$(document).addEventListener("keydown",function(e){
+	if(e.KeyCode == 39){
+		nextImgArrow();
+	}
+});
+
+$(document).addEventListener("keydown",function(e){
+	if(e.KeyCode == 39){
+		prevImgArrow();
+	}
+});
+
+*/

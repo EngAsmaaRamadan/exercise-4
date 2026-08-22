@@ -34,27 +34,13 @@ popupKeys.forEach(function(popupKey){
 	
 });
 
-nextImgButton.addEventListener("click",function(){
-	currentImgIndex=(++currentImgIndex % galleryImgs.length);
-	let nextImgIndex=currentImgIndex,
-		nextImg=galleryImgs[nextImgIndex];
-	convertToCurrentImg(nextImg.src);
-	updateIndicator();
-});
+nextImgButton.addEventListener("click",nextImgArrow);
 
-
-prevImgButton.addEventListener("click",function(){
-	currentImgIndex=(--currentImgIndex +galleryImgs.length)% galleryImgs.length;
-	let prevImgIndex=currentImgIndex,
-		prevImg=galleryImgs[prevImgIndex];
-	convertToCurrentImg(prevImg.src);
-	updateIndicator();
-
-});
+prevImgButton.addEventListener("click",prevImgArrow);
 
 popup.addEventListener("click",closePopup);
 popupBox.addEventListener("click",function(e){
-	e.stopPropagation();//to not close the popup in click on the box
+	e.stopPropagation();//to not close the popup when click on the box
 });
 
 indicatorButtons.forEach(function(indicatorButton,index){
@@ -65,6 +51,25 @@ indicatorButtons.forEach(function(indicatorButton,index){
 		updateIndicator();
 	});
 	
-})
+});
+
+document.addEventListener("keydown",function(e) {
+	if(e.keyCode == 27){
+		closePopup();
+	}
+});
+
+document.addEventListener("keydown",function(e){
+	if(e.keyCode == 39){
+		nextImgArrow();
+	}
+});
+
+document.addEventListener("keydown",function(e){
+	if(e.keyCode == 37){
+		prevImgArrow();
+	}
+});
+
 
 popupClose.addEventListener("click",closePopup);
