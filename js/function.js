@@ -17,7 +17,7 @@ function convertToCurrentImg(imgSrc){
 	popupImg.src=imgSrc;
 }
 
-function updateIndicator(){
+function updateIndicator(){/*to make active effect*/
 	let prevIndicator=popup.querySelector(".indicators li.active"),
 		currentIndicator=indicatorButtons[currentImgIndex];
 	prevIndicator.classList.remove("active");
@@ -40,24 +40,9 @@ function nextImgArrow(){
 	updateIndicator();
 }
 
-/*
-
-$(document).addEventListener("keydown",function(e) {
-	if(e.KeyCode == 27){
-		closePopup();
-	}
-});
-
-$(document).addEventListener("keydown",function(e){
-	if(e.KeyCode == 39){
-		nextImgArrow();
-	}
-});
-
-$(document).addEventListener("keydown",function(e){
-	if(e.KeyCode == 39){
-		prevImgArrow();
-	}
-});
-
-*/
+function updateIndicatorWhenClick(index){/*to navigate to the newImg with correct index of indicators*/
+	currentImg=galleryImgs[index];
+	currentImgIndex=index;
+	convertToCurrentImg(currentImg.src);
+	updateIndicator();
+}

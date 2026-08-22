@@ -9,7 +9,12 @@ let popupKeys=document.querySelectorAll("#Gallery .popupkeys"),
 	currentImgIndex,
 	popupImg=popup.querySelector("img"),
 	indicatorsContainer=popup.querySelector(".indicators"),
-	newIndicator;
+	newIndicator,
+	indicatorsKeyode=[];
+
+for (let i=0,j=48;( (i <= galleryImgs.length) && (j<=57) ); i++) {
+	indicatorsKeyode.push(j++);
+}
 
 for(let i = 0 ; i < galleryImgs.length ; i++){
 	newIndicator = document.createElement("li");
@@ -45,31 +50,27 @@ popupBox.addEventListener("click",function(e){
 
 indicatorButtons.forEach(function(indicatorButton,index){
 	indicatorButton.addEventListener("click",function(){
-		currentImg=galleryImgs[index];
-		currentImgIndex=index;
-		convertToCurrentImg(currentImg.src);
-		updateIndicator();
+		updateIndicatorWhenClick(index);
 	});
-	
 });
+
 
 document.addEventListener("keydown",function(e) {
-	if(e.keyCode == 27){
-		closePopup();
+	switch(e.keyCode) {
+		case 27:
+			closePopup();
+			break;
+		case 39:
+			nextImgArrow();
+			break;
+		case 37:
+			prevImgArrow();
+			break;
+	}
+
+	if (indicatorsKeyode.includes(e.keyCode) ){
+					updateIndicatorWhenClick(indicatorsKeyode.indexOf(e.keyCode-1));
 	}
 });
-
-document.addEventListener("keydown",function(e){
-	if(e.keyCode == 39){
-		nextImgArrow();
-	}
-});
-
-document.addEventListener("keydown",function(e){
-	if(e.keyCode == 37){
-		prevImgArrow();
-	}
-});
-
 
 popupClose.addEventListener("click",closePopup);
