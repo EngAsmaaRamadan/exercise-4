@@ -48,12 +48,6 @@ popupBox.addEventListener("click",function(e){
 	e.stopPropagation();//to not close the popup when click on the box
 });
 
-indicatorButtons.forEach(function(indicatorButton,index){
-	indicatorButton.addEventListener("click",function(){
-		updateIndicatorWhenClick(index);
-	});
-});
-
 let keyframesWrongNumber=[/*swing effect*/
 		{transform:"rotate(0deg)"},
 		{transform:"rotate(15deg)"},
@@ -76,6 +70,17 @@ let	keyframesRepeatCurrentNumber=[
 		direction:"alternate"
 	};
 
+indicatorButtons.forEach(function(indicatorButton,index){
+	indicatorButton.addEventListener("click",function(e){
+		let currentIndexTemp=currentImgIndex;
+		if(index==currentIndexTemp){
+			popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);
+		}else{
+			updateIndicatorWhenClick(index);
+		}
+	});
+});
+
 document.addEventListener("keydown",function(e) {
 	switch(e.keyCode) {
 		case 27:
@@ -89,17 +94,15 @@ document.addEventListener("keydown",function(e) {
 			break;
 	}
 
-	let currentIndex=currentImgIndex+1;
-	if(currentIndex==(e.keyCode%indicatorsKeyCode[0])){
-		popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);//must make animate here not one after one because it make override and cancel the prev animate
-	}
-
+	animationInRepeatNumber(e);
 	if (indicatorsKeyCode.includes(e.keyCode) && e.keyCode!=indicatorsKeyCode[0] && e.keyCode<=indicatorsKeyCode[galleryImgs.length]){
 		updateIndicatorWhenClick(indicatorsKeyCode.indexOf(e.keyCode-1));
-	}else if(e.keyCode==indicatorsKeyCode[0] || ( e.keyCode>indicatorsKeyCode[galleryImgs.length] && e.keyCode <= 57 ) ){/*57 is keyCode of 9*/
+	}else if(e.keyCode==indicatorsKeyCode[0] || e.keyCode>indicatorsKeyCode[galleryImgs.length]  ){/*57 is keyCode of 9*/
 		//specific animation when press 0 or number langer than galleryImgs.length
 		popupBox.animate(keyframesWrongNumber,optionsWrongNumber);
 	}
 });
+
+
 
 popupClose.addEventListener("click",closePopup);

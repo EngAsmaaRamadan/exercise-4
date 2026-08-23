@@ -46,3 +46,11 @@ function updateIndicatorWhenClick(index){/*to navigate to the newImg with correc
 	convertToCurrentImg(currentImg.src);
 	updateIndicator();
 }
+
+function animationInRepeatNumber(e){
+	let currentIndexTemp=currentImgIndex+1;
+	if(currentIndexTemp==(e.keyCode%indicatorsKeyCode[0])){
+		popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);//must make animate here not one after one because it make override and cancel the prev animate
+	}
+}
+
