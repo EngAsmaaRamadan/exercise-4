@@ -54,6 +54,31 @@ indicatorButtons.forEach(function(indicatorButton,index){
 	});
 });
 
+let keyframesWrongNumber=[/*swing effect*/
+		{transform:"rotate(0deg)"},
+		{transform:"rotate(15deg)"},
+		{transform:"rotate(-10deg)"},
+		{transform:"rotate(5deg)"},
+		{transform:"rotate(-5deg)"},
+		{transform:"rotate(0deg)"}
+	],
+	optionsWrongNumber={
+		duration:500,/*0.5s*/
+	},
+	keyframesRepeatCurrentNumber=[
+		{transform:"scale(1.0)"},
+		{transform:"scale(1.1)"},
+		{transform:"scale(1.0)"}
+	],
+	optionsRepeatCurrentNumber={
+		duration:500,
+		fill:"both",
+		direction:"alternate"
+	},
+	animationWrongNumber=popupBox.animate(keyframesWrongNumber,optionsWrongNumber),
+	animationRepeatCurrentNumber=popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);
+animationWrongNumber.pause();
+animationRepeatCurrentNumber.pause();
 
 document.addEventListener("keydown",function(e) {
 	switch(e.keyCode) {
@@ -68,8 +93,12 @@ document.addEventListener("keydown",function(e) {
 			break;
 	}
 
-	if (indicatorsKeyode.includes(e.keyCode) ){
-					updateIndicatorWhenClick(indicatorsKeyode.indexOf(e.keyCode-1));
+	if (indicatorsKeyode.includes(e.keyCode) && e.keyCode!=indicatorsKeyode[0] && e.keyCode<=indicatorsKeyode[galleryImgs.length]){
+		updateIndicatorWhenClick(indicatorsKeyode.indexOf(e.keyCode-1));
+	}else if(e.keyCode==indicatorsKeyode[0] || e.keyCode>indicatorsKeyode[galleryImgs.length]){
+		//specific animation when press 0 or number langer than galleryImgs.length
+		animationWrongNumber.play();
+		//animationRepeatCurrentNumber.play();
 	}
 });
 
