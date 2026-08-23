@@ -97,7 +97,7 @@ document.addEventListener("keydown",function(e) {
 	animationInRepeatNumber(e);
 	if (indicatorsKeyCode.includes(e.keyCode) && e.keyCode!=indicatorsKeyCode[0] && e.keyCode<=indicatorsKeyCode[galleryImgs.length]){
 		updateIndicatorWhenClick(indicatorsKeyCode.indexOf(e.keyCode-1));
-	}else if(e.keyCode==indicatorsKeyCode[0] || e.keyCode>indicatorsKeyCode[galleryImgs.length]  ){/*57 is keyCode of 9*/
+	}else if(e.keyCode==indicatorsKeyCode[0] || e.keyCode>indicatorsKeyCode[galleryImgs.length] ){/*57 is keyCode of 9*/
 		//specific animation when press 0 or number langer than galleryImgs.length
 		popupBox.animate(keyframesWrongNumber,optionsWrongNumber);
 	}
