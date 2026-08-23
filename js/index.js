@@ -10,10 +10,10 @@ let popupKeys=document.querySelectorAll("#Gallery .popupkeys"),
 	popupImg=popup.querySelector("img"),
 	indicatorsContainer=popup.querySelector(".indicators"),
 	newIndicator,
-	indicatorsKeyode=[];
+	indicatorsKeyCode=[];
 
 for (let i=0,j=48;( (i <= galleryImgs.length) && (j<=57) ); i++) {
-	indicatorsKeyode.push(j++);
+	indicatorsKeyCode.push(j++);
 }
 
 for(let i = 0 ; i < galleryImgs.length ; i++){
@@ -64,8 +64,8 @@ let keyframesWrongNumber=[/*swing effect*/
 	],
 	optionsWrongNumber={
 		duration:500,/*0.5s*/
-	},
-	keyframesRepeatCurrentNumber=[
+	};
+let	keyframesRepeatCurrentNumber=[
 		{transform:"scale(1.0)"},
 		{transform:"scale(1.1)"},
 		{transform:"scale(1.0)"}
@@ -74,11 +74,7 @@ let keyframesWrongNumber=[/*swing effect*/
 		duration:500,
 		fill:"both",
 		direction:"alternate"
-	},
-	animationWrongNumber=popupBox.animate(keyframesWrongNumber,optionsWrongNumber),
-	animationRepeatCurrentNumber=popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);
-animationWrongNumber.pause();
-animationRepeatCurrentNumber.pause();
+	};
 
 document.addEventListener("keydown",function(e) {
 	switch(e.keyCode) {
@@ -93,12 +89,16 @@ document.addEventListener("keydown",function(e) {
 			break;
 	}
 
-	if (indicatorsKeyode.includes(e.keyCode) && e.keyCode!=indicatorsKeyode[0] && e.keyCode<=indicatorsKeyode[galleryImgs.length]){
-		updateIndicatorWhenClick(indicatorsKeyode.indexOf(e.keyCode-1));
-	}else if(e.keyCode==indicatorsKeyode[0] || e.keyCode>indicatorsKeyode[galleryImgs.length]){
+	let currentIndex=currentImgIndex+1;
+	if(currentIndex==(e.keyCode%indicatorsKeyCode[0])){
+		popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);//must make animate here not one after one because it make override and cancel the prev animate
+	}
+
+	if (indicatorsKeyCode.includes(e.keyCode) && e.keyCode!=indicatorsKeyCode[0] && e.keyCode<=indicatorsKeyCode[galleryImgs.length]){
+		updateIndicatorWhenClick(indicatorsKeyCode.indexOf(e.keyCode-1));
+	}else if(e.keyCode==indicatorsKeyCode[0] || ( e.keyCode>indicatorsKeyCode[galleryImgs.length] && e.keyCode <= 57 ) ){/*57 is keyCode of 9*/
 		//specific animation when press 0 or number langer than galleryImgs.length
-		animationWrongNumber.play();
-		//animationRepeatCurrentNumber.play();
+		popupBox.animate(keyframesWrongNumber,optionsWrongNumber);
 	}
 });
 
