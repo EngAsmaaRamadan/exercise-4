@@ -17,7 +17,7 @@ function convertToCurrentImg(imgSrc){
 	popupImg.src=imgSrc;
 }
 
-function updateIndicator(){/*to make active effect*/
+function updateIndicator(){/*to add active effect on the indicators*/
 	let prevIndicator=popup.querySelector(".indicators li.active"),
 		currentIndicator=indicatorButtons[currentImgIndex];
 	prevIndicator.classList.remove("active");
