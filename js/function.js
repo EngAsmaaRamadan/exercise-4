@@ -1,4 +1,4 @@
-/*this folowing code doesn't work, because that i didnt give opacity 0 with display none in popup in*/
+/*this folowing code didn't work previous, because that i didnt give opacity 0 with display none in popup in index.css*/
 function openPopup(){
 	popup.classList.add("active");
 	setTimeout(function(){
@@ -13,7 +13,7 @@ function closePopup(){
 		},1000);//1000 because of transition-duration of 1s
 }
 
-function convertToCurrentImg(imgSrc){
+function convertToCurrentImg(imgSrc){/*update the current src*/
 	popupImg.src=imgSrc;
 }
 
@@ -53,4 +53,3 @@ function animationInRepeatNumber(e){
 		popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);//must make animate here not one after one because it make override and cancel the prev animate
 	}
 }
-

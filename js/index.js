@@ -103,6 +103,4 @@ document.addEventListener("keydown",function(e) {
 	}
 });
 
-
-
 popupClose.addEventListener("click",closePopup);
