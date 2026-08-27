@@ -1,20 +1,16 @@
-let popupKeys=document.querySelectorAll("#Gallery .popupkeys"),
-	popup=document.querySelector(".popup"),
-	popupClose=popup.querySelector(".close"),
-	prevImgButton=popup.querySelector(".prev"),
-	nextImgButton=popup.querySelector(".next"),
-	popupBox=popup.querySelector(".box"),
-	galleryImgs=document.querySelectorAll("#Gallery img"),
+let popupKeys = document.querySelectorAll("#Gallery .popupkeys"),
+	popup = document.querySelector(".popup"),
+	popupClose = popup.querySelector(".close"),
+	prevImgButton = popup.querySelector(".prev"),
+	nextImgButton = popup.querySelector(".next"),
+	popupBox = popup.querySelector(".box"),
+	galleryImgs = document.querySelectorAll("#Gallery img"),
 	currentImg,
 	currentImgIndex,
-	popupImg=popup.querySelector("img"),
-	indicatorsContainer=popup.querySelector(".indicators"),
+	popupImg = popup.querySelector("img"),
+	indicatorsContainer = popup.querySelector(".indicators"),
 	newIndicator,
-	indicatorsKeyCode=[];
-
-for (let i=0,j=48;( (i <= galleryImgs.length) && (j<=57) ); i++) {
-	indicatorsKeyCode.push(j++);
-}
+	currentIndexTemp;
 
 for(let i = 0 ; i < galleryImgs.length ; i++){
 	newIndicator = document.createElement("li");
@@ -25,18 +21,17 @@ for(let i = 0 ; i < galleryImgs.length ; i++){
 	}
 }
 
-let indicatorButtons=popup.querySelectorAll(".indicators li");
+let indicatorButtons = popup.querySelectorAll(".indicators li");//must be after loop of creating li
 
 popupKeys.forEach(function(popupKey){
-	popupKey.addEventListener("click",openPopup);
 	popupKey.addEventListener("click",function(){
-	currentImg=popupKey.parentElement.previousElementSibling;
-	let galleryImgsArr=Array.from(galleryImgs);
-	currentImgIndex=galleryImgsArr.indexOf(currentImg);
+	openPopup();
+	currentImg = popupKey.parentElement.previousElementSibling;
+	let galleryImgsArr = Array.from(galleryImgs);
+	currentImgIndex = galleryImgsArr.indexOf(currentImg);
 	convertToCurrentImg(currentImg.src);
 	updateIndicator();
 	});
-	
 });
 
 nextImgButton.addEventListener("click",nextImgArrow);
@@ -72,8 +67,8 @@ let	keyframesRepeatCurrentNumber=[
 
 indicatorButtons.forEach(function(indicatorButton,index){
 	indicatorButton.addEventListener("click",function(e){
-		let currentIndexTemp=currentImgIndex;
-		if(index==currentIndexTemp){
+		currentIndexTemp = currentImgIndex;
+		if(index == currentIndexTemp){
 			popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);
 		}else{
 			updateIndicatorWhenClick(index);
@@ -82,25 +77,40 @@ indicatorButtons.forEach(function(indicatorButton,index){
 });
 
 document.addEventListener("keydown",function(e) {
-	switch(e.keyCode) {
-		case 27:
+	switch(e.key) {
+		case 'Escape':
 			closePopup();
 			break;
-		case 39:
+		case 'ArrowRight':
 			nextImgArrow();
 			break;
-		case 37:
+		case 'ArrowLeft':
 			prevImgArrow();
 			break;
 	}
+	let key = e,
+		lastTimeOut;
 
+
+
+	lastTimeOut = setTimeout(function(){
+		key += Number(e.key);
+		clearTimeout(lastTimeOut);
+		fireAnimationOrUpdateIndicatorsWhenKeydown(e);
+		key = '';
+		lastTimeOut = undefined;
+	},100);
+	
+});
+
+function fireAnimationOrUpdateIndicatorsWhenKeydown(e){
 	animationInRepeatNumber(e);
-	if (indicatorsKeyCode.includes(e.keyCode) && e.keyCode!=indicatorsKeyCode[0] && e.keyCode<=indicatorsKeyCode[galleryImgs.length]){
-		updateIndicatorWhenClick(indicatorsKeyCode.indexOf(e.keyCode-1));
-	}else if(e.keyCode==indicatorsKeyCode[0] || e.keyCode>indicatorsKeyCode[galleryImgs.length] ){/*57 is keyCode of 9*/
+	if ( e.key <= galleryImgs.length ){
+		updateIndicatorWhenClick(e.key - 1);
+	}else if(e.key.charCodeAt(0) <= 0 || e.key.charCodeAt(0) > galleryImgs.length ){
 		//specific animation when press 0 or number langer than galleryImgs.length
 		popupBox.animate(keyframesWrongNumber,optionsWrongNumber);
 	}
-});
+}
 
 popupClose.addEventListener("click",closePopup);
