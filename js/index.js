@@ -10,8 +10,11 @@ let popupKeys = document.querySelectorAll("#Gallery .popupkeys"),
 	popupImg = popup.querySelector("img"),
 	indicatorsContainer = popup.querySelector(".indicators"),
 	newIndicator,
-	currentIndexTemp;
+	currentIndexTemp,
+	latestkey = '',
+	lastTimeOut;
 
+//creating indicators li
 for(let i = 0 ; i < galleryImgs.length ; i++){
 	newIndicator = document.createElement("li");
 	newIndicator.textContent = i + 1;
@@ -23,6 +26,7 @@ for(let i = 0 ; i < galleryImgs.length ; i++){
 
 let indicatorButtons = popup.querySelectorAll(".indicators li");//must be after loop of creating li
 
+//open popup
 popupKeys.forEach(function(popupKey){
 	popupKey.addEventListener("click",function(){
 	openPopup();
@@ -34,11 +38,15 @@ popupKeys.forEach(function(popupKey){
 	});
 });
 
+//get next img by using click on right arrow
 nextImgButton.addEventListener("click",nextImgArrow);
 
+//get previous img by using click on left arrow
 prevImgButton.addEventListener("click",prevImgArrow);
 
+//when click on popup but not click on his child(popupBox)
 popup.addEventListener("click",closePopup);
+
 popupBox.addEventListener("click",function(e){
 	e.stopPropagation();//to not close the popup when click on the box
 });
@@ -65,6 +73,7 @@ let	keyframesRepeatCurrentNumber=[
 		direction:"alternate"
 	};
 
+//update indicators when click on the indicator button(like 1,2,3 and so on)
 indicatorButtons.forEach(function(indicatorButton,index){
 	indicatorButton.addEventListener("click",function(e){
 		currentIndexTemp = currentImgIndex;
@@ -76,41 +85,28 @@ indicatorButtons.forEach(function(indicatorButton,index){
 	});
 });
 
+//update indicators, animations, closePopup
 document.addEventListener("keydown",function(e) {
 	switch(e.key) {
 		case 'Escape':
 			closePopup();
-			break;
+			return;
 		case 'ArrowRight':
 			nextImgArrow();
-			break;
+			return;
 		case 'ArrowLeft':
 			prevImgArrow();
-			break;
+			return;
 	}
-	let key = e,
-		lastTimeOut;
-
-
-
-	lastTimeOut = setTimeout(function(){
-		key += Number(e.key);
-		clearTimeout(lastTimeOut);
-		fireAnimationOrUpdateIndicatorsWhenKeydown(e);
-		key = '';
-		lastTimeOut = undefined;
-	},100);
-	
+	latestkey += e.key;
+		lastTimeOut = setTimeout(function(){
+			latestkey = Number(latestkey);
+			clearTimeout(lastTimeOut);
+			fireAnimationOrUpdateIndicatorsWhenKeydown(latestkey);
+			latestkey = '';
+			lastTimeOut = undefined;
+		},500);
 });
 
-function fireAnimationOrUpdateIndicatorsWhenKeydown(e){
-	animationInRepeatNumber(e);
-	if ( e.key <= galleryImgs.length ){
-		updateIndicatorWhenClick(e.key - 1);
-	}else if(e.key.charCodeAt(0) <= 0 || e.key.charCodeAt(0) > galleryImgs.length ){
-		//specific animation when press 0 or number langer than galleryImgs.length
-		popupBox.animate(keyframesWrongNumber,optionsWrongNumber);
-	}
-}
-
+//close when click on icon popupClose
 popupClose.addEventListener("click",closePopup);

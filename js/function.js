@@ -47,9 +47,19 @@ function updateIndicatorWhenClick(index){/*to navigate to the newImg with correc
 	updateIndicator();
 }
 
-function animationInRepeatNumber(e){
+function animationInRepeatNumber(key){
 	currentIndexTemp = currentImgIndex + 1;
-	if(currentIndexTemp == e.key ){
+	if(currentIndexTemp == key ){
 		popupBox.animate(keyframesRepeatCurrentNumber,optionsRepeatCurrentNumber);//must make animate here not one after one because it make override and cancel the prev animate
+	}
+}
+
+function fireAnimationOrUpdateIndicatorsWhenKeydown(latestkey){
+	animationInRepeatNumber(latestkey);
+	if ( latestkey <= galleryImgs.length && latestkey > 0){
+		updateIndicatorWhenClick(latestkey - 1);
+	}else if(latestkey.toString().charCodeAt(0) <= '0' || latestkey.toString().charCodeAt(0) > galleryImgs.length ){
+		//specific animation when press 0 or number langer than galleryImgs.length
+		popupBox.animate(keyframesWrongNumber,optionsWrongNumber);
 	}
 }
