@@ -4,16 +4,133 @@
 	<meta charset="utf-8">
 	<meta name="description" content="This is my first exercise with JavaScript language"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<meta name="keywords" content="HTML, CSS, JavaScript, exercise_to_apply_on_js, jQuery"/>
+	<meta name="keywords" content="HTML, CSS, JavaScript, exercise_to_apply_on_js"/>
 	<meta name="author" content="" />
-	<title>session jquery</title>
+	<title>SemiCode : Exercise_04</title>
+	<link rel="icon" type="images/x-icon" href="images/icon.png">
+	<link rel="stylesheet" href="css/all.min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/global.css">
 	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/index.responsive.css">
 
 </head>
 <body>
-	<div class="box"></div>
-<script src="js/jquery.js"></script>
+	<section id="Gallery" class="py-5">
+		<div class="container pb-4">
+			<div class="row row-gap-4">
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/1.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/2.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/3.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/4.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/5.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/6.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/7.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/8.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/9.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/10.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/11.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="item position-relative overflow-hidden">
+						<img src="images/12.jpg" alt="ex4-img" class="img-fluid">
+						<div class="layout d-flex justify-content-center align-items-center position-absolute top-0 left-0">
+							<i class="fa-regular fa-square-plus popupkeys"></i>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</section>
+	
+	<div class="popup position-fixed top-0 left-0 justify-content-center align-items-center">
+		<div class="box overflow-hidden position-relative">
+			<img src="images/1.jpg" class="img-fluid" alt="ex4-img">
+			<i class="fa-solid fa-xmark close"></i>
+			<i class="fa-solid fa-chevron-left prev"></i>
+			<i class="fa-solid fa-chevron-right next"></i>
+			<div class="cover">
+			<ul class="indicators list-unstyled d-flex"></ul>
+			</div>
+		</div>
+	</div>			
+<script src="js/function.js"></script>
 <script src="js/index.js"></script>
 </body>
 </html>
